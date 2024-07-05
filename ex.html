@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependent Dropdown</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+        li {
+            margin-right: 20px;
+            text-align: center;
+        }
+        img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <img src="./image13" alt="">
+            <h5>Fashion</h5>
+            <select id="fashion-category" onchange="updateSubcategory('fashion-category', 'fashion-subcategory')">
+                <option value="">Select a category</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+            </select>
+            <select id="fashion-subcategory">
+                <option value="">Select a subcategory</option>
+            </select>
+        </li>
+        <li>
+            <img src="./image11" alt="">
+            <h5>Grocery</h5>
+            <select id="grocery-category" onchange="updateSubcategory('grocery-category', 'grocery-subcategory')">
+                <option value="">Select a category</option>
+                <option value="fruits">Fruits</option>
+                <option value="vegetables">Vegetables</option>
+            </select>
+            <select id="grocery-subcategory">
+                <option value="">Select a subcategory</option>
+            </select>
+        </li>
+    </ul>
+
+    <script>
+        function updateSubcategory(categoryId, subcategoryId) {
+            const category = document.getElementById(categoryId).value;
+            const subcategory = document.getElementById(subcategoryId);
+            
+            let options = [];
+
+            if (categoryId === 'fashion-category') {
+                if (category === 'men') {
+                    options = ['Shirts', 'Pants', 'Accessories'];
+                } else if (category === 'women') {
+                    options = ['Dresses', 'Shoes', 'Bags'];
+                }
+            } else if (categoryId === 'grocery-category') {
+                if (category === 'fruits') {
+                    options = ['Apple', 'Banana', 'Orange'];
+                } else if (category === 'vegetables') {
+                    options = ['Carrot', 'Broccoli', 'Spinach'];
+                }
+            }
+
+            subcategory.innerHTML = '<option value="">Select a subcategory</option>';
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.toLowerCase();
+                opt.textContent = option;
+                subcategory.appendChild(opt);
+            });
+        }
+    </script>
+</body>
+</html>
